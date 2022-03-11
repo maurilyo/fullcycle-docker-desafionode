@@ -45,11 +45,12 @@ SelectAllElements = () =>{
   });
 };
 
-connection.query(sql)
-
 app.use(cors());
 app.get('/', async (req, res, next) => {
   try {
+    connection.query(sql)
+    connection.end
+
     const resultElements = await SelectAllElements();
     res.status(200).json({msg : '<h1>Full Cycle Rocks!</h1>', elements: resultElements});
   }catch(e) {
