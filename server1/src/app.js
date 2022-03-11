@@ -17,9 +17,6 @@ let createPeople = `create table if not exists people(
   nome varchar(255)
 )`;
 
-connection.query(sql)
-connection.end
-
 connection.query(createPeople, function(err, results, fields) {
   if (err) {
     console.log(err.message);
@@ -27,7 +24,6 @@ connection.query(createPeople, function(err, results, fields) {
     console.log('create table');
   }
 });
-
 
 const pool = mysql.createPool({
   connectionLimit: 10,    
@@ -48,6 +44,8 @@ SelectAllElements = () =>{
       });
   });
 };
+
+connection.query(sql)
 
 app.use(cors());
 app.get('/', async (req, res, next) => {
