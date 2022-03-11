@@ -10,7 +10,24 @@ const config = {
 var nomes;
 const mysql = require('mysql')
 const connection = mysql.createConnection(config)
-const sql = `INSERT INTO people(name) values('Maurilio')`
+const sql = `INSERT INTO people(nome) values('Maurilio')`
+
+let createPeople = `create table if not exists people(
+  id int primary key auto_increment,
+  nome varchar(255)
+)`;
+
+connection.query(sql)
+connection.end
+
+connection.query(createPeople, function(err, results, fields) {
+  if (err) {
+    console.log(err.message);
+  }else{
+    console.log('create table');
+  }
+});
+
 
 const pool = mysql.createPool({
   connectionLimit: 10,    
